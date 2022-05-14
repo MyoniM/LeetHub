@@ -20,6 +20,9 @@ class Solution:
             diff = sub_arr[1] - sub_arr[0]
             
             for j in range(len(sub_arr)-1):
-                if sub_arr[j + 1] -  sub_arr[j] != diff: answer[i] = False
-        
+                if sub_arr[j + 1] -  sub_arr[j] != diff:
+                    answer[i] = False
+                    # extra loop not needed
+                    break
+                    
         return answer
