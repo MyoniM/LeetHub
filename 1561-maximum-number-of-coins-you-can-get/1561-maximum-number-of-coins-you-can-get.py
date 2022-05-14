@@ -5,7 +5,7 @@ class Solution:
         
         l = len(piles)
         # calculate max loop
-        partition = len(piles) // 3
+        partition = l // 3
         count = 0
         
         # example piles = [9,8,7,6,5,1,2,3,4]
