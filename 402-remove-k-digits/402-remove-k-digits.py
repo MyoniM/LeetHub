@@ -7,7 +7,6 @@ class Solution:
         for i in num:
             while s and k > 0 and s[-1] > i:
                 s.pop()
-                # if s[-1] != i:
                 k-=1
             s.append(i)
             
