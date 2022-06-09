@@ -15,16 +15,10 @@ class Solution:
                 return True
         return False
     
-    # build adecency list
+    # build adjacency list
     def buildGraph(self, edges):
-        graph = {}
-        for e in edges:
-            key, val = e[0], e[1]
-            if key not in graph:
-                graph[key] = []
-            if val not in graph:
-                graph[val] = []
-                
-            graph[val].append(key)
-            graph[key].append(val)
+        graph = defaultdict(list)
+        for k, v in edges:
+            graph[v].append(k)
+            graph[k].append(v)
         return graph
