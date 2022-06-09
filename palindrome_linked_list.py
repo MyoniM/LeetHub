@@ -1,4 +1,5 @@
 class Solution:
+    # O(n) time | O(1) space
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
         current = head
         values = []
