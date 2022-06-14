@@ -16,6 +16,7 @@ class Solution:
             
         first = head
         second = slow.next
+        
         prevNode = slow.next = None
         while True:
             tempNext = second.next
@@ -24,8 +25,6 @@ class Solution:
             prevNode = second
             second = tempNext
             
-        
-        
         while second:
             tmp1, tmp2 = first.next, second.next
             first.next = second
