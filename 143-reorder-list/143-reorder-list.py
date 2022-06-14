@@ -15,9 +15,16 @@ class Solution:
             slow = slow.next
             
         first = head
-        tempNext = slow.next
-        slow.next = None
-        second = self.reverseLinkedList(tempNext)
+        second = slow.next
+        prevNode = slow.next = None
+        while True:
+            tempNext = second.next
+            second.next = prevNode
+            if tempNext is None: break
+            prevNode = second
+            second = tempNext
+            
+        
         
         while second:
             tmp1, tmp2 = first.next, second.next
@@ -25,13 +32,3 @@ class Solution:
             second.next = tmp1
             first, second = tmp1, tmp2
 
-    def reverseLinkedList(self, currentNode):
-        prevNode = None
-        while True:
-            tempNext = currentNode.next
-            currentNode.next = prevNode
-            if tempNext is None: break
-            prevNode = currentNode
-            currentNode = tempNext
-        return currentNode
-        
