@@ -1,25 +1,14 @@
-
 class Solution:
-    def findKthBit(self, n, k):
-        output = ''
-        result = self.binary(n, output)
-        return result[k-1]
-    
-    def binary(self, n, output):
-        if n==1:
-            output += "0"
-            return output
-        else:
-            # saves it from computing twice
-            x = self.binary(n-1, output)
-            output += x + "1" + self.inverse(x)
-            return output
-
-    def inverse(self, bits):
-        res = ''
-        for i in bits:
-            if i=="0":
-                res+="1"
-            else:
-                res+="0"
-        return res[::-1]
+    def findKthBit(self, n: int, k: int) -> str:
+        bits = {"0": "1",
+                "1": "0"}
+        return self.getBit(n, bits)[k-1]
+        
+    def getBit(self, n: int, bits):
+        if n == 1: return "0"
+        bit = self.getBit(n - 1, bits)
+        bitArr = []
+        for b in bit:
+            bitArr.append(bits[b])
+            
+        return list(bit) + ["1"] + bitArr[::-1]
