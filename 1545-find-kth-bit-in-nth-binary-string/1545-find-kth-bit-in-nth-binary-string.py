@@ -11,4 +11,4 @@ class Solution:
         for b in bit:
             bitArr.append(bits[b])
             
-        return list(bit) + ["1"] + bitArr[::-1]
+        return bit + "1" + "".join(bitArr[::-1])
