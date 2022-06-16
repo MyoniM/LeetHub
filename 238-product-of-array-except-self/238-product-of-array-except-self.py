@@ -6,20 +6,18 @@ class Solution:
             if i == 0: 
                 zCount += 1
                 continue
-                
             mult *= i
         
         answer = []
         for i in nums:
-            if i == 0 and zCount <= 1:
+            if i == 0 and zCount == 1:
                 answer.append(mult)
-                continue
-            if i != 0 and zCount > 0:
+            elif i != 0:
+                if zCount == 0:
+                    answer.append(mult//i)
+                else:
+                    answer.append(0)
+            else:
                 answer.append(0)
-                continue
-            if i != 0 and zCount == 0:
-                answer.append(mult//i)
-                continue
-            answer.append(0)
 
         return answer
