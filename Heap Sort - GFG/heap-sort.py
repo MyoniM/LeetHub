@@ -19,13 +19,13 @@ class Solution:
                 return
         
     def buildHeap(self,array, n):
-        firstParentIdx = (len(array) - 2) // 2
+        firstParentIdx = (n - 2) // 2
         for currentIdx in reversed(range(firstParentIdx + 1)):
-            self.heapify(currentIdx, len(array) - 1, array)
+            self.heapify(currentIdx, n - 1, array)
          
     def HeapSort(self, array, n):
         self.buildHeap(array, n)
-        for endIdx in reversed(range(1, len(array))):
+        for endIdx in reversed(range(1, n)):
             self.swap(0, endIdx, array)
             self.heapify(0, endIdx - 1, array)
             
