@@ -11,14 +11,10 @@ class Solution:
         answer = []
         for i in nums:
             if i == 0:
-                if zCount == 1:
-                    answer.append(mult)
-                else:
-                    answer.append(0)
+                if zCount == 1: answer.append(mult)
+                else: answer.append(0)
             else:
-                if zCount == 0:
-                    answer.append(mult//i)
-                else:
-                    answer.append(0)
+                if zCount == 0: answer.append(mult//i)
+                else: answer.append(0)
 
         return answer
