@@ -17,6 +17,6 @@ class Solution:
                 if matrix[r][c] > mid:
                     break
                 count += 1
-        return count
+        return count 
     
     
