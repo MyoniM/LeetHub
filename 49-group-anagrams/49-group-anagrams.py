@@ -1,14 +1,10 @@
 class Solution:
     def groupAnagrams(self, words: List[str]) -> List[List[str]]:
+        # O(wn) time | O(wn) space
+        # n being array length
+        # w being length of the longest word
         anagrams = {}
         for word in words:
-            key = self.getKey(word)
+            key = frozenset(Counter(word).items())
             anagrams[key] = anagrams.get(key, []) + [word]
         return list(anagrams.values())
-
-    def getKey(self, word):
-        alphabetArr = [0] * 26
-        for c in word:
-            order = ord(c) - ord('a')
-            alphabetArr[order] += 1
-        return tuple(alphabetArr)
