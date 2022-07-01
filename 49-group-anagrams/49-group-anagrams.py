@@ -1,17 +1,14 @@
 class Solution:
-    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+    def groupAnagrams(self, words: List[str]) -> List[List[str]]:
+        anagrams = {}
+        for word in words:
+            key = self.getKey(word)
+            anagrams[key] = anagrams.get(key, []) + [word]
+        return list(anagrams.values())
 
-        hashmap = defaultdict(list)
-        
-        for s in strs:
-            
-            count = [0] * 26
-            
-            for c in s:
-                # change the character to index (0 - 25)
-                # ord("a") - ord("a") = 0
-                count[ord(c) - ord("a")] += 1
-                
-            hashmap[tuple(count)].append(s)        
-        
-        return hashmap.values()
+    def getKey(self, word):
+        alphabetArr = [0] * 26
+        for c in word:
+            order = ord(c) - ord('a')
+            alphabetArr[order] += 1
+        return tuple(alphabetArr)
