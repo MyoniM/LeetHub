@@ -17,7 +17,7 @@ class Solution:
                 c += 1
             right -= 1
             
-            if left >= right or top >= bottom: break
+            # if left >= right or top >= bottom: break
 
 
             for i in range(right - 1, left - 1, -1):
@@ -31,5 +31,4 @@ class Solution:
             left += 1
             
             
-            # break
         return grid
