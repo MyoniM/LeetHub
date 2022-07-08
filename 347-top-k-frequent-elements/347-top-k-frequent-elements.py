@@ -3,11 +3,8 @@ class Solution:
         # O(1) time 
         if k == len(nums):
             return nums
-        
-        # 1. build hash map : character and how often it appears
-        # O(N) time
-        count = Counter(nums)   
-        # 2-3. build heap of top k frequent elements and
-        # convert it into an output array
-        # O(N log k) time
-        return heapq.nlargest(k, count.keys(), key=count.get) 
+
+        count = Counter(nums)
+        mc = count.most_common(k)
+        for i in range(len(mc)): mc[i] = mc[i][0]
+        return mc
