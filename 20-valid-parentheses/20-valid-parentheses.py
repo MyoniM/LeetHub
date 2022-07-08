@@ -4,15 +4,14 @@ class Solution:
         if len(s) % 2 != 0 : return False
         op = ["(","{","["]
         cd = [")","}","]"]
-
         stack = []
-
-        for b in s:
-            if b in op: stack.append(b)
-            else: 
-                if len(stack) > 0 and stack.pop() == op[cd.index(b)]:
-                    continue
-                else: return False
-
-        if len(stack) > 0: return False
-        return True
+        for i in range(len(s)):
+            if s[i] in op: stack.append(s[i])
+            else:
+                if not stack: return False
+                cb = s[i]
+                cbi = cd.index(cb)
+                ob = op[cbi]
+                if stack[-1] != ob: return False
+                stack.pop()
+        return (not stack)
