@@ -1,13 +1,19 @@
 class Solution:
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        ans = [-1] * len(nums1)
-        stack = []
-        num1_hash = {e:i for i,e in enumerate(nums1)}
-
-        for e in nums2:
-            while stack and stack[-1] < e:
-                ans[num1_hash[stack.pop()]] = e
-                
-            if e in num1_hash: stack.append(e)
-                
-        return ans
+        hash2 = {}
+        r = []
+        for i in range(len(nums2)):
+            hash2[nums2[i]] = i
+            
+        for e in nums1:
+            i2 = hash2[e]
+            r.append(self.getNextMax(i2, nums2))
+        return r
+    
+    def getNextMax(self, ii, arr):
+        n = -1
+        for i in range(ii, len(arr)):
+            if arr[i] > arr[ii]:
+                n = arr[i]
+                break
+        return n
