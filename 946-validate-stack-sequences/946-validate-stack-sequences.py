@@ -1,19 +1,13 @@
 class Solution:
-    def validateStackSequences(self, pu: List[int], po: List[int]) -> bool:
-#         loop through pushed 
-#         if s[-1] is popped[0]
-#            yes: pop from s and popped while not same
-#            no: add to s
-#         return s is empty
+    def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
+
         s = []
-        for e in pu:
-            if s and s[-1] == po[0]:
-                while s and s[-1] == po[0]:
-                    s.pop()
-                    po.pop(0)
-                s.append(e)
-            else: s.append(e)
-        while s and s[-1] == po[0]:
-            s.pop()
-            po.pop(0)
+        j = 0
+        
+        for i in pushed:
+            s.append(i)
+            
+            while s and s[-1] == popped[j]:
+                s.pop()
+                j+=1
         return not s
