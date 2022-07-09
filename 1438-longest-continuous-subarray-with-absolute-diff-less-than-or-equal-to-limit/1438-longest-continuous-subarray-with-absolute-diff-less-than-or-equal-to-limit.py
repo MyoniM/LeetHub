@@ -1,33 +1,29 @@
 class Solution:
-    def longestSubarray(self, nums: List[int], limit: int) -> int:
+    def longestSubarray(self, ns: List[int], lm: int) -> int:
+        lL = 0
+        l, r = 0, 0
+        n = len(ns)
+        
+        d_q = deque() # 10 1
+        i_q = deque() # 1 
 
-        window = l = r = 0
-        i_q = deque()
-        d_q = deque()
-
-        while r < len(nums):
-            # get the max value from window
-            while d_q and nums[d_q[-1]] <= nums[r]:
+        # [10,1,2,4,7,2]
+        while r < n:
+            while d_q and ns[d_q[-1]] < ns[r]:
                 d_q.pop()
-            # get the min value from window
-            while i_q and nums[i_q[-1]] >= nums[r]:
-                i_q.pop()
-                
-            i_q.append(r)
             d_q.append(r)
-
-            # subtract the min val from the max val
-            # and shrink window
-            # while it satisfies diff <= limit
-            while nums[d_q[0]] - nums[i_q[0]] > limit:
-                l+=1
-                # pop the index in a queue when 
-                # the left pointer becomes greater
-                if l > i_q[0]: i_q.popleft()
-                if l > d_q[0]: d_q.popleft()
-            window = max(window, r-l+1)
-            r+=1
-
-        return window
+            while i_q and ns[i_q[-1]] > ns[r]:
+                i_q.pop()
+            i_q.append(r)
             
             
+            while ns[d_q[0]] - ns[i_q[0]] > lm:
+                l += 1
+                if i_q[0] < l: i_q.popleft()
+                if d_q[0] < l: d_q.popleft()
+            
+            lL = max(r - l + 1, lL)
+            
+            r += 1
+
+        return lL
