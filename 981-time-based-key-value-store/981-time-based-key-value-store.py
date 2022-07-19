@@ -1,14 +1,14 @@
 class TimeMap:
 
     def __init__(self):
-        self.keyStore = defaultdict(list)
+        self.store = defaultdict(list)
         
     def set(self, key: str, value: str, timestamp: int) -> None:
-        self.keyStore[key].append([value, timestamp])
+        self.store[key].append([value, timestamp])
 
     def get(self, key: str, timestamp: int) -> str:
         res = ""
-        values = self.keyStore.get(key, [])
+        values = self.store.get(key, [])
         l, r = 0, len(values) - 1
         while l <= r:
             m = (l + r) // 2
