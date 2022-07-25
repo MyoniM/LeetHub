@@ -1,3 +1,4 @@
+# O(l1 + (l2 - l1)) time | O(1) space
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
         l1 = len(s1)
