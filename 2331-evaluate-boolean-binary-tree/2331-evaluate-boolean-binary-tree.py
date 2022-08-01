@@ -5,8 +5,16 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def evaluateTree(self, root: Optional[TreeNode]) -> bool:
-        if not root.left and not root.right:
-            if root.val == 1: return True
-            else: return False
-        return self.evaluateTree(root.left) and self.evaluateTree(root.right) if root.val == 3 else self.evaluateTree(root.left) or self.evaluateTree(root.right)
+    def evaluateTree(self, node: Optional[TreeNode]) -> bool:
+        VAL_MAP = {
+            0: False,
+            1: True
+        }
+        if node.left is None: return VAL_MAP[node.val]
+        return self.dfsHelper(node, VAL_MAP)
+        
+    def dfsHelper(self, node, VAL_MAP):
+        if node.left is None and node.right is None:
+            return VAL_MAP[node.val]
+        
+        return self.dfsHelper(node.left, VAL_MAP) and self.dfsHelper(node.right, VAL_MAP) if node.val == 3 else self.dfsHelper(node.left, VAL_MAP) or  self.dfsHelper(node.right, VAL_MAP)
