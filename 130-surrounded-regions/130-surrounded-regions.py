@@ -41,10 +41,9 @@ class Solution:
         onesConnectedToBorder.add(node)
 
         # dfs neighbors
-        self.dfSearch(matrix, r + 1, c, onesConnectedToBorder)
-        self.dfSearch(matrix, r - 1, c, onesConnectedToBorder)
-        self.dfSearch(matrix, r, c + 1, onesConnectedToBorder)
-        self.dfSearch(matrix, r, c - 1, onesConnectedToBorder)
+        directions = [[-1, 0], [1, 0], [0, 1], [0, -1]]
+        for dr, dc in directions:
+            self.dfSearch(matrix, r + dr, c + dc, onesConnectedToBorder)
 
     def getStrNode(self, r, c):
         return "{} {}".format(r, c)
