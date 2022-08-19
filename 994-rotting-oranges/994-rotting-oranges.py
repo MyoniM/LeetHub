@@ -1,8 +1,5 @@
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
-        # get rotten, count fresh
-        visitedOranges = [[False] * len(grid[0]) for row in grid]
-
         freshOrangesCount, rottenOranges = self.getOrangesCount(grid)
         if freshOrangesCount == 0: return 0
         rottenOragesQ = deque(rottenOranges)
@@ -15,25 +12,25 @@ class Solution:
             freshOrangesToRot += rottenOragesSize
             for _ in range(rottenOragesSize):
                 rottenOrange = rottenOragesQ.popleft()
-                neighbors = self.getNeighbors(rottenOrange, grid, visitedOranges)
+                neighbors = self.getNeighbors(rottenOrange, grid)
                 for neighbor in neighbors: rottenOragesQ.append(neighbor)
         return minute - 1 if (freshOrangesToRot - rottenOrangesCount) == freshOrangesCount else -1
     
-    def getNeighbors(self, rottenOrange, grid, visitedOranges):
+    def getNeighbors(self, rottenOrange, grid):
         neighbors = []
         row, col = rottenOrange
         directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
         for dr, dc in directions:
             newCell = (row + dr, col + dc)
-            if self.isValidCell(newCell, grid, visitedOranges):
+            if self.isValidCell(newCell, grid):
                 neighbors.append(newCell)
-                visitedOranges[row + dr][col + dc] = True
+                grid[row + dr][col + dc] = 2
         return neighbors
     
-    def isValidCell(self, newCell, grid, visitedOranges):
+    def isValidCell(self, newCell, grid):
         lenR, lenC = len(grid), len(grid[0])
         row, col = newCell
-        if row in range(lenR) and col in range(lenC) and grid[row][col] == 1 and not visitedOranges[row][col]:
+        if row in range(lenR) and col in range(lenC) and grid[row][col] == 1:
             return True
         return False
     
