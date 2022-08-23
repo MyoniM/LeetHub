@@ -16,4 +16,3 @@ class Solution:
             return    
         self.do(root.left, targetSum, runningSum + root.val, path[:] + [root.val], res)
         self.do(root.right, targetSum, runningSum + root.val, path[:] + [root.val], res)
-        return res
