@@ -25,4 +25,4 @@ class Solution:
         for value in counter.values():
             if oddsCount > 1: return False
             if value % 2 != 0: oddsCount += 1
-        return True if oddsCount < 2 else False
+        return oddsCount < 2
