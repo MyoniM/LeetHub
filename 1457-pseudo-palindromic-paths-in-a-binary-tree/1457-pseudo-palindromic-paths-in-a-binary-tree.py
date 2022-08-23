@@ -13,12 +13,12 @@ class Solution:
     def dfsHelper(self, root, counter):
         if not root: return
         counter[root.val] = 1 + counter.get(root.val, 0)
+        self.dfsHelper(root.left, counter)
+        self.dfsHelper(root.right, counter)
         if root.left is None and root.right is None:
             if self.isPalindrome(counter):
                 self.palindromicPathCount += 1
-            return
-        self.dfsHelper(root.left, dict(counter))
-        self.dfsHelper(root.right, dict(counter))
+        counter[root.val] -= 1
 
     def isPalindrome(self, counter):
         oddsCount = 0
