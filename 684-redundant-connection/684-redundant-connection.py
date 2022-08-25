@@ -1,4 +1,4 @@
-class UnionFind:
+class DSU:
     def __init__(self):
         self.parent = {}
         self.rank = {}
@@ -23,9 +23,9 @@ class UnionFind:
     
 class Solution:
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
-        uf = UnionFind()
+        dsu = DSU()
         for a, b in edges:
-            if uf.find(a) == uf.find(b):
+            if dsu.find(a) == dsu.find(b):
                 return [a, b]
-            uf.union(a, b)
+            dsu.union(a, b)
         
