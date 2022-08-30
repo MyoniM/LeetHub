@@ -1,19 +1,15 @@
 class Solution:
-    def subsets(self, array: List[int]) -> List[List[int]]:
-
-        def helper(arr, subsets):
-            if len(arr) == 2: return
-            for n in arr:
-                newArr = slice(n, arr)
-                subsets.add(newArr)
-                helper(newArr, subsets)
-
-        def slice(n, arr):
-            return tuple(i for i in arr if i != n)
-        
-        if not array: return [array]
-        if len(array) == 1: return [array, []]
-        res = [[], array] + [[n] for n in array]
-        subsets = set()
-        helper(array, subsets)
-        return res + list(subsets)
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        subset = []
+        def dfs(i):
+            if i >= len(nums):
+                res.append(subset.copy())
+                return
+            subset.append(nums[i])
+            dfs(i+1)
+            subset.pop()
+            dfs(i+1)
+            
+        dfs(0)
+        return res
