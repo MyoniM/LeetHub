@@ -1,31 +1,29 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
-        L = len(word)
-        RB = len(board)
-        CB = len(board[0])
-        for row in range(RB):
-            for col in range(CB):
-                if self.find(row, col, 0, RB, CB, L, word, board):
+        row, col = len(board), len(board[0])
+        directions = [(-1, 0), (1, 0), (0, 1), (0, -1)]
+        
+        def dfs(r, c, ind):
+            if r < 0 or c < 0 or r == row or c == col:
+                return False
+            if board[r][c] != word[ind]:
+                return False
+            if ind == len(word)-1:
+                return True
+            tmp = board[r][c]
+            board[r][c] = "0"
+            for dr, dc in directions:
+                nr, nc = r+dr, c+dc
+                if dfs(nr, nc, ind+1):
+                    return True
+            board[r][c] = tmp
+            return False
+        
+        for i in range(row):
+            for j in range(col):
+                if dfs(i, j, 0):
                     return True
         return False
-        
-    def find(self, row, col, letterIdx, RB, CB, L, word, board):        
-        if letterIdx == L:
-            return True
-
-        if row < 0 or col < 0 or row >= RB or col >= CB: 
-            return False
-        
-        if board[row][col] != word[letterIdx]:
-            return False
-        
-        DIRECTIONS = [[0,1], [0,-1], [1,0], [-1,0]]
-        temp = board[row][col]
-        board[row][col] = "#"
-        for nRow, nCol in DIRECTIONS:
-            if self.find(row + nRow, col + nCol, letterIdx + 1, RB, CB, L, word, board):
-                return True
-        board[row][col] = temp    
 
     
     
