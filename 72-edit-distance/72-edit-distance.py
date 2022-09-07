@@ -10,9 +10,9 @@ class Solution:
             if not(i>=n or j>=m) and (str1[i] == str2[j]):
                 cache[(i, j)] = dfs(i+1, j+1)
                 return cache[(i, j)]
-            insert = 1+dfs(i, j+1)
-            delete = 1+dfs(i+1, j)
-            subs = 1+dfs(i+1, j+1)
-            cache[(i, j)] = min(insert, delete, subs)
+            insert = dfs(i, j+1)
+            delete = dfs(i+1, j)
+            subs = dfs(i+1, j+1)
+            cache[(i, j)] = 1+min(insert, delete, subs)
             return cache[(i, j)]
         return dfs(0, 0)
